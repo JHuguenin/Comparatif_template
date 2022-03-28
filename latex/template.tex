@@ -8,6 +8,7 @@
 $if(colorlinks)$
 \PassOptionsToPackage{dvipsnames,svgnames*,x11names*}{xcolor}
 $endif$
+
 % Right to left support
 $if(dir)$
   $if(latex-dir-rtl)$
@@ -26,6 +27,24 @@ $endif$
   $for(classoption)$$classoption$$sep$,$endfor$
   ]{$documentclass$}
 
+%%%% add by JH
+% REDEFINE CHAPTERS AND SECTIONS
+\usepackage{xcolor}
+% define colors
+   \definecolor{sectioncolour}{RGB}{37.6,135.4,38.1}
+   \definecolor{chaptercolour}{RGB}{37.6,135.4,38.1}
+\definecolor{subsectioncolour}{RGB}{37.6,135.4,38.1}
+
+\setsecheadstyle{\Large\bfseries\color{sectioncolour}}% Set \section style
+\setsubsecheadstyle{\large\bfseries\color{subsectioncolour}}% Set \subsection style
+
+
+\renewcommand{\chapnamefont}{\normalfont\large\scshape\raggedleft\color{chaptercolour}}
+\renewcommand{\chapnumfont}{\Huge\bfseries\color{chaptercolour}}
+\renewcommand{\chaptitlefont}{\normalfont\Huge\bfseries\sffamily\raggedleft\color{chaptercolour}}
+%%%% End ajout by JH
+
+ 
 % Double (or whatever) spacing
 $if(linestretch)$
 \usepackage{setspace}
@@ -87,6 +106,7 @@ $endif$
 % Color links
 $if(colorlinks)$
 \usepackage{xcolor}
+
 $endif$
 
 % Strikeout
@@ -205,6 +225,11 @@ $endif$
 % Layout
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%% add by JH
+\definecolor{nicered}{rgb}{.147,.529,.149}
+\addtodef\chaptitlefont{}{\color{nicered}}
+%%%% endadd by JH
+
 % Based on memoir, style companion
 \newcommand{\MemoirChapStyle}{$MemoirChapStyle$}
 \newcommand{\MemoirPageStyle}{$MemoirPageStyle$}
@@ -287,23 +312,13 @@ $endif$
 	\begin{textblock}{2}(30,10)
 		\rule{1pt}{\paperheight-20mm}
 	\end{textblock}
-	\begin{textblock}{140}(50, 45)
-		\flushright
-		\begin{Spacing}{3}
-			{\fontfamily{qtm}\selectfont\fontsize{45}{45}\selectfont \textsc{\thetitle}}
-		\end{Spacing}
-	\end{textblock}
 	\begin{textblock}{140}(50, 125)
 		\flushright
-		{\fontfamily{qtm}\Large \theauthor}
-	\end{textblock}
-	$if(filigrane)$
-	\begin{textblock}{120}[1, 1](225, 297)
-		\includegraphics[width=10cm]{$filigrane$}
-	 \end{textblock}
-	$endif$
-	\begin{textblock}{140}[0, 1](50, 262)
-		\normalfont	Version: \thedate
+		{\fontfamily{qtm} À travers ce rapport, je dédicace
+		cette année de M2 à Thomas M. Kyle, lauréat du prix Ignobel 1991 pour la
+		découverte de l'élément le plus lourd de l'Univers : l’Administratium. Je
+		salue les efforts cumulés mis en oeuvre pour honorer le trentième 
+		anniversaire de ce prix et remercie ceux qui ont su faire preuves de patience.}
 	\end{textblock}
 	\newpage
 	~\\ % Print a character or the page will not exist

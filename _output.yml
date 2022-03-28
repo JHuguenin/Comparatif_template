@@ -16,8 +16,8 @@ bookdown::gitbook:
       github: yes
     toc:
       before: |
-        <li><a href="./">Title of the Memoir</a></li>
+        <li><a href="./">Développement d’outils d’analyses pour les données de PTR-ToF-MS</a></li>
       after: |
-        <li><a href="https://github.com/GitHubID/Repository" target="blank">Published with bookdown</a></li>
+        <li><a href="https://www.researchgate.net/profile/Joris-Huguenin-2" target="blank">Joris Huguenin</a></li>
     download: "pdf"
 bookdown::word_document2: default

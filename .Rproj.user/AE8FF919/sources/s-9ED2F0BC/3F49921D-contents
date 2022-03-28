@@ -1,32 +1,21 @@
 --- 
-title: "Title of the Memoir"
-author: "Authors' names"
+title: "Développement d’outils d’analyses pour les données de PTR-ToF-MS"
+author: "Joris Huguenin"
 date: "`r Sys.Date()`"
-url: https://GitHubID.github.io/Repository/
+url: https://github.com/JHuguenin/M2_SSV_JH.git
 github-repo: GitHubID/Repository
-description: "Bookdown template based on LaTeX memoir class"
+description: "Mémoire de master mathémathique Statistique pour les Sciences de la Vie"
 cover-image: "images/logo.png"
 # Title page...
 maintitlepage:
   epigraph: |
-    This document is reproducible thanks to:
-    \begin{itemize}
-      \item \LaTeX and its class memoir (\url{http://www.ctan.org/pkg/memoir}).
-      \item R (\url{http://www.r-project.org/}) and RStudio (\url{http://www.rstudio.com/})
-      \item bookdown (\url{http://bookdown.org/}) and memoiR (\url{https://ericmarcon.github.io/memoiR/})
-    \end{itemize}
   credits: |
-    Name of the owner of the logo
-    
-    \url{http://www.company.com}
-    
-    An explanatory sentence.
-    Leave an empty line for line breaks.
+    \url{https://www.cefe.cnrs.fr/fr/}
 # ... or a PDF cover
 pdftitlepage: images/cover.pdf
 # Language
-lang: en-US
-otherlangs: [fr-FR,it]
+lang: fr-FR
+otherlangs: [en-US,it]
 # LaTeX
 documentclass: memoir
 classoption:
@@ -45,16 +34,16 @@ mainfontoptions:
   - BoldItalicFont=*-bolditalic
 # mathfont: texgyretermes-math.otf # Times New Roman for equations
 # memoir Style
-MemoirChapStyle: daleif1           # or companion with large margins
+MemoirChapStyle: daleif1          # or companion with large margins " daleif1
 MemoirPageStyle: Ruled             # or companion with large margins
 # Margins
 largemargins: false                # or true for large margins
-smallmargin: 1.5in                 # outer margin (small).
-largemargin: 3in                   # outer margin (large)
-marginnote:  1.8in                 # note width in large margin
-spinemargin: 1.5in                 # spine margin. Reduce to 1.2 with large margins.
-uppermargin: 1.5in                 # upper margin
-lowermargin: 1in                   # lower margin
+smallmargin: 2cm                 # outer margin (small).
+largemargin: 2cm                   # outer margin (large)
+marginnote:  2cm                 # note width in large margin
+spinemargin: 2cm                 # spine margin. Reduce to 1.2 with large margins.
+uppermargin: 2cm                 # upper margin
+lowermargin: 2cm                   # lower margin
 # Table of contents
 toc-depth: 2
 # Section numbering
@@ -66,13 +55,13 @@ lof: true
 bibliography: references.bib
 biblatexoptions:
   - backend=biber
-  - style=authoryear-ibid  # or verbose-inote with large margins
+  - style=alphabetic  # or verbose-inote with large margins
 # - pageref=true           # uncomment for verbose-inotes style
   - isbn=false
   - backref=true
   - giveninits=true
   - uniquename=init
-  - maxcitenames=2
+  - maxcitenames=1
   - maxbibnames=150
   - sorting=nyt
   - sortcites=false
@@ -82,15 +71,29 @@ chaptersummary: In a Nutshell
 backcover:
   - language: english
     abstract: |
-      English abstract, on the last page.
-  
-      This is a bookdown template based on LaTeX memoir class.
+      The PTR-ToF-MS is used to analyze the emission kinetics of VOCs. The CEFE laboratory is equipped with such an instrument since 2019. This memoir deals with the exploitation of datasets in the context of chemical ecology. Several experiments are presented as well as the theory of PTR-ToF-MS. The numerical tools are grouped in the R package: proVOC. A particular focus is made on the use of MCR.
     keywords:
-      - Keyword in English
-      - As a list
+      - Chimiometry
+      - Open Science
+      - PTR-ToF-MS
+      - Spectrometry
+      - Environment
     abstractlabel: Abstract
     keywordlabel: Keywords
+  - language: french
+    abstract: |
+      La PTR-ToF-MS permet d'analyser la cinétique d'émission des COVs. Le laboratoire CEFE s'est doté d'un tel instrument en fin d'année 2019. Ce mémoire traite de l'exploitation de jeu de données dans le cadre de l'écologie chimique. Plusieurs expériences sont présentées ainsi que la théorie de la PTR-ToF-MS. Les outils numériques sont regroupés dans le package R : proVOC. Un focus particulier est fait sur l'utilisation de la MCR.
+    keywords:
+      - Chimiométrie
+      - PTR-ToF-MS
+      - Science ouverte
+      - Spectrométrie
+      - Environnement
+    abstractlabel: Résumé
+    keywordlabel: Mots-Clés
 backcoverfontsize: normalsize
+
+
 # Figure cropping may be set to no if ghostscript is not installed
 fig_crop: true
 # Do not modify
@@ -171,39 +174,35 @@ theme_update(panel.background=element_rect(fill="transparent", colour=NA),
 knitr::opts_chunk$set(dev.args=list(bg="transparent"))
 
 # Random seed
-set.seed(973)
+set.seed(90)
 ```
 
 
-# Introduction {-}
+# Glossaire {-}
 
-This document allows you to create a book in PDF format (and ePub format) at the same time as an HTML version to be published on the web.
-The syntax is that of **Markdown** with some extensions.
+AUC : Area Under the Curve. Calcul de l'aire sous la courbe. 
 
-The **bookdown** package must be installed from CRAN or GitHub:
+CEFE (UMR 5175) : Centre d'Écologie Fonctionnelle et Évolutive. Laboratoire d'accueil situé sur le site de la DR13 du CNRS, route de Mende à Montpellier.  
 
-```{r eval=FALSE}
-install.packages("bookdown")
-# or the development version
-# devtools::install_github("rstudio/bookdown")
-```
+COV (ou VOC) : Composé Organique Volatil. Molécule produite par des systèmes biologiques et analysée par le PTR-ToF-MS.  
 
-The book is organized in chapters. 
-Each chapter is an Rmd file, whose name normally begins with its number (e.g. `01-intro.Rmd`).
-All Rmd files in the project folder are actually treated as chapters, sorted by filename.
-The index.Rmd file is special: it contains the document header and the first chapter.
+Gaz zéro : gaz purifié grâce à un filtre à charbon.  
 
-This first chapter is placed in the foreword of the printed book: it should not be numbered (hence the `{-}` code next to the title) in the HTML version.
-It must end with the LaTeX command `\mainmatter` which marks the beginning of the body of the book.
+GC-MS : Gaz Chromatography Mass Spectrometry. Autre méthode d'analyse des COV, moins sensible mais plus discriminante que la PTR-ToF-MS.  
 
-The outline levels start with `#` for chapters (only one per file), `##` for sections, etc.
+ICA : Independent Component Analysis. Méthode de calcul permettant de séparer les sources indépendantes. 
 
-Compilation in PDF format is done by XeLaTeX, which must be installed.
+JADE : Joint Approximation Diagonalization of Eigen-matrices. Algorithme itératif utilisant le principe de l'ICA
 
-While writing, it is strongly advised to create only the HTML file, which is much faster than a LaTeX compilation.
-Each chapter can be viewed very quickly by clicking on the _Knit_ button above the source window.
-The entire book is created by clicking on the _Build Book_ button in the RStudio _Build_ window.
-The button's drop-down list allows you to create all documents or limit yourself to one format.
+MCR-ALS : Multivariate Curve Resolution - Alternating Least Squares. Méthode de calcul permettant de retrouver les spectres purs. 
+
+PACE : Plateforme d'Analyses Chimiques en Écologie. Plateforme située au sein de l'UMR 5175.  
+
+PCA : Principal Component Analysis (ou ACP). Algorithme utilisé pour faire ressortir la variabilité entre les échantillons.
+
+PTR-ToF-MS : Proton Transfert Reaction Time of Flight Mass Spectrometry. Acronyme utilisé pour l'instrument de mesure (l**e** PTR-ToF-M**Spectrometer**) et pour la méthode d'analyse (l**a** PTR-ToF-M**Spectrometry**). Par abus de langage, l'acronyme PTR-MS est régulièrement utilisé à l'oral.  
+
+
 
 <!-- The \mainmatter command marks the beginning of the LaTeX document body--> 
 <!-- It must not be deleted-->
